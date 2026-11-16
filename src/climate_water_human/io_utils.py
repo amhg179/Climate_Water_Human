@@ -54,7 +54,7 @@ def duckdb_csv_source(con: duckdb.DuckDBPyConnection, path: Path, tmp_dir: Path)
     posix = path.as_posix().replace("'", "''")
     expr = f"read_csv('{posix}', encoding='latin-1', all_varchar=true, header=true)"
     try:
-        con.sql(f"SELECT count(*) FROM {expr}").fetchone()
+        con.execute(f"SELECT count(*) FROM {expr}").fetchone()
         return expr
     except duckdb.InvalidInputException:
         utf8 = transcode_to_utf8(path, tmp_dir / f"{path.stem}.utf8.csv")
