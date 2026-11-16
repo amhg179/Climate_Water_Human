@@ -1,0 +1,7 @@
+Source,Variable,Start,End,Spatial Resolution,Temporal Resolution,Downloaded
+GEMStat,Chlorophyll-a,حسب المحطة,حسب المحطة,Station,Irregular,Yes
+Sentinel-2,Reflectance,2015,Current,10–20 m,Irregular,No
+ERA5-Land,Temperature,1950,Current,~9 km,Hourly,No
+WorldPop,Population,2015,2030,~100 m,Annual,No
+GBD,Diarrhoeal disease,1990,2021,Country/Subnational,Annual,No
+JMP,Drinking water,2000,2024,Country/Subnational,Irregular estimates,No

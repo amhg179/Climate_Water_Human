@@ -1,0 +1,13 @@
+Step,Task,Action,Rows_Before,Rows_Removed,Rows_After
+1,قراءة جميع ملفات القياسات,"Read 51,157,266 measurements from all files; kept the target variables of section 2.B",51157266,46172961,4984305
+2,قراءة Metadata الخاصة بالمحطات,Removed samples whose station is absent from station metadata,4984305,0,4984305
+3,قراءة Metadata الخاصة بالمتغيرات,Removed samples whose parameter code is absent from parameter metadata,4984305,0,4984305
+4,توحيد أسماء المتغيرات,Mapped GEMStat parameter codes to standard names (e.g. Chl-a → Chlorophyll-a),4984305,0,4984305
+5,توحيد الوحدات,"Converted to standard units (Chl-a mg/l→µg/L ×1000, E. coli 1/ml→CFU/100 mL ×100); removed units without a known conversion (e.g. Turbidity JCU)",4984305,3519,4980786
+6,توحيد التواريخ,Removed unparseable dates and dates outside 1900-01-01 … 2026-11-16,4980786,0,4980786
+7,فحص الإحداثيات,Removed samples from stations with missing/invalid coordinates,4980786,0,4980786
+8,إزالة السجلات المكررة,"Removed exact duplicate samples (station, date, time, depth, parameter, method, value)",4980786,204197,4776589
+9,إنشاء جدول للقياسات الصحيحة,Removed non-numeric values,4776589,0,4776589
+9,إنشاء جدول للقياسات الصحيحة,Removed values flagged Suspect / Contamination by GEMStat,4776589,701,4775888
+9,إنشاء جدول للقياسات الصحيحة,Removed physically implausible values (outside valid range),4775888,5096,4770792
+10,حفظ سجل لجميع عمليات التنظيف,Wrote Water_Quality_Samples.parquet and this cleaning log,4770792,0,4770792

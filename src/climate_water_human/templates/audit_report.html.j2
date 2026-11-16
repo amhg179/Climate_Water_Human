@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>01 Global Water Quality Data Audit — GEMStat V3</title>
+<style>
+  body { font-family: "Segoe UI", Tahoma, "Noto Naskh Arabic", Arial, sans-serif; margin: 0; background: #f5f7fa; color: #1d2733; }
+  header { background: #1f4e79; color: #fff; padding: 28px 40px; }
+  header h1 { margin: 0 0 6px; font-size: 26px; }
+  header p { margin: 2px 0; opacity: .9; }
+  main { max-width: 1250px; margin: 0 auto; padding: 24px 32px 60px; }
+  section { background: #fff; border-radius: 10px; padding: 20px 26px; margin: 18px 0; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  h2 { color: #1f4e79; border-bottom: 2px solid #dfe7f0; padding-bottom: 6px; font-size: 20px; }
+  .ltr { direction: ltr; text-align: left; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; }
+  .card { background: #eef4fb; border-radius: 8px; padding: 12px 14px; }
+  .card .v { font-size: 22px; font-weight: 700; color: #1f4e79; direction: ltr; text-align: right; }
+  .card .k { font-size: 13px; color: #445; direction: ltr; text-align: right; }
+  .tblwrap { overflow-x: auto; max-height: 520px; overflow-y: auto; direction: ltr; }
+  table.tbl { border-collapse: collapse; font-size: 12.5px; width: 100%; }
+  table.tbl th { background: #1f4e79; color: #fff; position: sticky; top: 0; padding: 6px 8px; text-align: left; }
+  table.tbl td { border-bottom: 1px solid #e6ebf1; padding: 4px 8px; text-align: left; }
+  table.tbl tr:nth-child(even) td { background: #f8fafc; }
+  img { max-width: 100%; border: 1px solid #e3e8ef; border-radius: 6px; }
+  ol.steps li { margin: 4px 0; }
+  .ok { color: #1a7f37; font-weight: 700; } .no { color: #b42318; font-weight: 700; }
+  .note { background: #fff8e6; border-right: 4px solid #f0a500; padding: 10px 14px; border-radius: 6px; }
+  footer { text-align: center; color: #667; font-size: 12px; padding: 20px; }
+</style>
+</head>
+<body>
+<header>
+  <h1 dir="ltr" style="text-align:right">01_Global_Water_Quality_Data_Audit</h1>
+  <p class="ltr" style="text-align:right">A Global Explainable Multimodal Learning Framework for Climate-Driven Freshwater Quality Changes and Human Health Vulnerability Assessment</p>
+  <p>تدقيق GEMStat V3 — UNEP GEMS/Water Global Freshwater Quality Archive (DOI: {{ doi }})</p>
+  <p>Generated {{ generated }} · pipeline v{{ version }}</p>
+</header>
+<main>
+
+<section>
+  <h2>ما الذي ينفذه هذا التدقيق تلقائيًا؟</h2>
+  <ol class="steps">
+    <li>تنزيل GEMStat V3 — <span class="ltr">{{ archive.name }} ({{ archive.size_mb }} MB, MD5 {{ archive.md5 }})</span></li>
+    <li>فك ضغط الملفات.</li>
+    <li>اكتشاف كل ملفات CSV — {{ csv_counts.total }} ملفًا ({{ csv_counts.measurements }} ملف قياسات + {{ csv_counts.metadata }} ملفات Metadata).</li>
+    <li>قراءة Metadata.</li>
+    <li>حساب عدد المحطات والدول.</li>
+    <li>إحصاء كل متغير من متغيرات جودة المياه.</li>
+    <li>حساب عدد القياسات لكل سنة.</li>
+    <li>رسم خريطة المحطات.</li>
+    <li>اكتشاف المحطات ذات السلاسل الزمنية الطويلة.</li>
+    <li>تحديد المحطات التي يمكن مطابقتها مع Sentinel-2 وERA5-Land.</li>
+    <li>إخراج تقرير HTML وExcel.</li>
+  </ol>
+</section>
+
+<section>
+  <h2>1. حساب عدد المحطات والدول</h2>
+  <div class="cards">
+  {% for row in overview.itertuples() %}
+    <div class="card"><div class="v">{{ row.Value if (row.Value is not number or "year" in row.Metric) else "{:,}".format(row.Value) }}</div><div class="k">{{ row.Metric }}</div></div>
+  {% endfor %}
+  </div>
+  <h3>Stations by water type</h3>
+  <div class="tblwrap">{{ table(water_types)|safe }}</div>
+</section>
+
+<section>
+  <h2>2. رسم خريطة المحطات</h2>
+  <img src="{{ figures.map }}" alt="Station map">
+  <p>الخريطة التفاعلية: <span class="ltr">station_map.html</span></p>
+</section>
+
+<section>
+  <h2>3. حساب عدد القياسات لكل سنة</h2>
+  <img src="{{ figures.per_year }}" alt="Measurements per year">
+  <img src="{{ figures.target_per_year }}" alt="Target variables per year">
+</section>
+
+<section>
+  <h2>4. متغيرات جودة المياه المستهدفة (القسم 2.B) بعد المعالجة</h2>
+  <p>شكل جدول البيانات بعد المعالجة: <span class="ltr">Station_ID | Date | Parameter | Value | Unit | Quality</span></p>
+  <div class="tblwrap">{{ table(sample_rows)|safe }}</div>
+  <h3>ملخص المتغيرات المستهدفة</h3>
+  <div class="tblwrap">{{ table(clean_summary)|safe }}</div>
+  <h3>التغطية في النافذتين الزمنيتين (القسم 5)</h3>
+  <div class="tblwrap">{{ table(windows)|safe }}</div>
+</section>
+
+<section>
+  <h2>5. إحصاء كل متغير من متغيرات جودة المياه ({{ variables|length }} متغير)</h2>
+  <div class="tblwrap">{{ table(variables)|safe }}</div>
+</section>
+
+<section>
+  <h2>6. التغطية الجغرافية لكل دولة (القسم 8.3)</h2>
+  <img src="{{ figures.countries }}" alt="Stations per country">
+  <div class="tblwrap">{{ table(countries)|safe }}</div>
+</section>
+
+<section>
+  <h2>7. المحطات ذات السلاسل الزمنية الطويلة (≥ {{ cfg.LONG_SERIES_MIN_YEARS }} سنوات)</h2>
+  <p>{{ "{:,}".format(long_series|length) }} محطة. أعلى 200 محطة:</p>
+  <div class="tblwrap">{{ table(long_series, 200)|safe }}</div>
+</section>
+
+<section>
+  <h2>8. المحطات التي يمكن مطابقتها مع Sentinel-2 وERA5-Land</h2>
+  <div class="cards">
+    <div class="card"><div class="v">{{ "{:,}".format(match_counts.s2) }}</div><div class="k">Sentinel-2 matchable stations</div></div>
+    <div class="card"><div class="v">{{ "{:,}".format(match_counts.era5) }}</div><div class="k">ERA5-Land matchable stations</div></div>
+    <div class="card"><div class="v">{{ "{:,}".format(match_counts.both) }}</div><div class="k">Both</div></div>
+    <div class="card"><div class="v">{{ "{:,}".format(match_counts.s2_samples) }}</div><div class="k">Optical samples ≥ {{ cfg.SENTINEL2_START }}</div></div>
+  </div>
+  <p class="note">Sentinel-2: محطة مياه سطحية بإحداثيات صحيحة ولديها قياس واحد على الأقل لمتغير بصري/حراري ({{ cfg.OPTICAL_PARAMETERS|join(", ") }}) بعد {{ cfg.SENTINEL2_START }}. ERA5-Land: إحداثيات صحيحة وقياسات بعد {{ cfg.ERA5_LAND_START }}. هذه مرشحات أولية؛ المطابقة الفعلية تتطلب تنزيل المشاهد وفحص السحب والقناع المائي.</p>
+  <img src="{{ figures.match_map }}" alt="Matchable stations">
+  <div class="tblwrap">{{ table(matchability, 200)|safe }}</div>
+</section>
+
+<section>
+  <h2>9. اختبارات جودة البيانات (القسم 8.1)</h2>
+  <div class="tblwrap">{{ table(quality)|safe }}</div>
+  <h3>Missing Data</h3>
+  <div class="tblwrap">{{ table(missing)|safe }}</div>
+  <h3>Data Quality flags</h3>
+  <div class="tblwrap">{{ table(quality_dist)|safe }}</div>
+  <h3>سجل عمليات التنظيف (القسم 7.1)</h3>
+  <div class="tblwrap">{{ table(cleaning_log)|safe }}</div>
+</section>
+
+<section>
+  <h2>10. data_source_inventory.csv (القسم 6.3)</h2>
+  <div class="tblwrap">{{ table(inventory)|safe }}</div>
+</section>
+
+<section>
+  <h2>11. Dataset Readiness Checklist — {{ readiness_score }}/10</h2>
+  <div class="tblwrap">{{ table(readiness)|safe }}</div>
+</section>
+
+<section>
+  <h2>ملفات CSV المكتشفة</h2>
+  <div class="tblwrap">{{ table(csv_files)|safe }}</div>
+</section>
+
+</main>
+<footer>Data: UNEP GEMS/Water Global Freshwater Quality Archive v3 (CC BY 4.0), Heinle, Lisniak &amp; Saile — doi:{{ doi }}</footer>
+</body>
+</html>
