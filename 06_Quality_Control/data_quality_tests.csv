@@ -1,0 +1,11 @@
+الاختبار,ما الذي نتحقق منه؟,Result,Status
+Completeness,نسبة البيانات المفقودة,"Missing Value: 0.0%, Sample_Date: 0.0%, Depth: 0.0% of 51,157,266 rows",Pass
+Consistency,اتساق الوحدات,"203 parameters reported in >1 unit; 3,519 target samples removed because their unit has no known conversion",Warning
+Spatial Accuracy,صحة الإحداثيات,"0 of 22,946 stations with missing/invalid coordinates",Pass
+Temporal Accuracy,صحة التواريخ,0 target samples with unparseable/out-of-range dates removed,Pass
+Duplicates,التكرار,"35 duplicate station-metadata rows; 204,197 duplicate target samples removed",Warning
+Outliers,القيم غير المنطقية,"5,096 physically implausible target values removed",Warning
+Sensor Quality,جودة المشاهد الفضائية,Satellite scenes are not acquired at this stage (acquisition step 3),Pending
+Label Quality,موثوقية القياسات الأرضية,Good/Fair: 91.23%; Suspect/Contamination/Pending review: 1.14%,Pass
+Cross-source Agreement,التوافق بين مصادر القياس,Requires the Water Quality Portal (acquisition step 2) as a second source,Pending
+Coverage Bias,التحيز الجغرافي في توزيع البيانات,60.2% of stations are in Europe; top-3 countries hold 64.2% of measurements,Warning

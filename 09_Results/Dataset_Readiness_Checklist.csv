@@ -1,0 +1,11 @@
+#,Item,Done,Evidence
+1,تم تنزيل GEMStat V3 وفهم Metadata,✔,Archive MD5 verified; station/parameter/method metadata parsed
+2,تم تحديد محطات المياه ذات القياسات المناسبة,✔,"22,009 stations with clean target-variable measurements"
+3,تم تحديد متغيرات جودة المياه المستهدفة,✔,10 target variables (section 2.B) harmonised
+4,تم تحديد المشاهد الفضائية المتزامنة مع القياسات الأرضية,✘,"14,291 candidate stations for Sentinel-2 matching identified; scenes not yet downloaded"
+5,تم تنزيل بيانات المناخ المتوافقة زمنيًا ومكانيًا,✘,"22,009 candidate stations for ERA5-Land extraction identified; climate data not yet downloaded"
+6,تم تحديد التغطية البشرية والصحية الفعلية,✘,WorldPop / JMP / WHO / GBD not yet processed
+7,تم توحيد الوحدات والتواريخ والإحداثيات,✔,"Units, dates and coordinates standardised for GEMStat (cleaning log)"
+8,تم إعداد تقرير Missing Data وData Quality,✔,Missing-data and data-quality reports generated (06_Quality_Control)
+9,تم تحديد مجموعات Train وValidation وIndependent Test,✘,Pending — after multimodal integration
+10,تم التأكد من عدم وجود Data Leakage,✘,Pending — after Train/Validation/Test design

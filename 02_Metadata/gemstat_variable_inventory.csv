@@ -1,0 +1,11 @@
+Source,Variable,Start,End,Spatial Resolution,Temporal Resolution,Downloaded,Measurements,Stations
+GEMStat,pH,1963,2024,Station,Irregular,Yes,932301,20800
+GEMStat,Water Temperature,1963,2024,Station,Irregular,Yes,837190,18217
+GEMStat,Nitrate (as N),1906,2024,Station,Irregular,Yes,796121,20010
+GEMStat,Conductivity,1963,2024,Station,Irregular,Yes,737585,19974
+GEMStat,DO,1936,2024,Station,Irregular,Yes,624475,16909
+GEMStat,TSS,1978,2024,Station,Irregular,Yes,336116,11151
+GEMStat,Turbidity,1979,2023,Station,Irregular,Yes,202573,7122
+GEMStat,Chlorophyll-a,1983,2023,Station,Irregular,Yes,112044,4957
+GEMStat,CDOM,2012,2020,Station,Irregular,Yes,100489,5427
+GEMStat,E. coli,1988,2023,Station,Irregular,Yes,91898,3237
