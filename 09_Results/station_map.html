@@ -17,7 +17,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_a44577c5b7b1eb3343a306bf402a3c01 {
+                #map_30a3524bae50bb47cfc8aab723413afd {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -57,14 +57,14 @@
 <body>
     
     
-            <div class="folium-map" id="map_a44577c5b7b1eb3343a306bf402a3c01" ></div>
+            <div class="folium-map" id="map_30a3524bae50bb47cfc8aab723413afd" ></div>
         
 </body>
 <script>
     
     
-            var map_a44577c5b7b1eb3343a306bf402a3c01 = L.map(
-                "map_a44577c5b7b1eb3343a306bf402a3c01",
+            var map_30a3524bae50bb47cfc8aab723413afd = L.map(
+                "map_30a3524bae50bb47cfc8aab723413afd",
                 {
                     center: [30.0, 0.0],
                     crs: L.CRS.EPSG3857,
@@ -81,7 +81,7 @@
 
         
     
-            var tile_layer_ea166e320d511600ed337a653894e954 = L.tileLayer(
+            var tile_layer_8160d5b2a5ee1e778dc712cb0501b2f0 = L.tileLayer(
                 "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
                 {
   "minZoom": 0,
@@ -98,10 +98,10 @@
             );
         
     
-            tile_layer_ea166e320d511600ed337a653894e954.addTo(map_a44577c5b7b1eb3343a306bf402a3c01);
+            tile_layer_8160d5b2a5ee1e778dc712cb0501b2f0.addTo(map_30a3524bae50bb47cfc8aab723413afd);
         
     
-            var fast_marker_cluster_79dd2adac4f88289d7b2ca8e9bef0d9d = (function(){
+            var fast_marker_cluster_b5f721840d0fa84ce77204d8c6098c88 = (function(){
                 var callback = function (row) {
         var m = L.circleMarker(new L.LatLng(row[0], row[1]), {radius: 4, color: row[2], fillOpacity: 0.8});
         m.bindPopup(row[3]);
@@ -118,12 +118,12 @@
                     marker.addTo(cluster);
                 }
 
-                cluster.addTo(map_a44577c5b7b1eb3343a306bf402a3c01);
+                cluster.addTo(map_30a3524bae50bb47cfc8aab723413afd);
                 return cluster;
             })();
         
     
-            fast_marker_cluster_79dd2adac4f88289d7b2ca8e9bef0d9d.addTo(map_a44577c5b7b1eb3343a306bf402a3c01);
+            fast_marker_cluster_b5f721840d0fa84ce77204d8c6098c88.addTo(map_30a3524bae50bb47cfc8aab723413afd);
         
 </script>
 </html>
